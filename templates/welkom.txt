@@ -1,0 +1,6 @@
+<div id="welcome">
+	<h2>Welkom</h2>
+	<p>
+		Voor al uw explosies, groot en klein, bent u op het juiste adres!
+	</p>
+</div>

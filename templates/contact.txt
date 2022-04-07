@@ -1,0 +1,14 @@
+<div id="contact">
+	<h2>Bezoekadres</h2>
+	<p>
+		Grote Boem straat 15b<br />
+		4321BM<br />
+		Vuurnis
+	</p>
+	<h2>Online</h2>
+	<p>
+		<b>Email</b>: <i>boem@vuurwerkpaleis.nl</i><br />
+		<b>Facetragram</b>: <i>@vuurwerkpaleis</i><br />
+		<b>LinkedGoogle</b>: <i>vuurwerkpaleis1996</i>
+	</p>
+</div>

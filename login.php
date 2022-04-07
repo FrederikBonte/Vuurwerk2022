@@ -1,0 +1,24 @@
+<?php
+include "templates/header_nologin.txt";
+include "common/update_customer.php";
+
+if (array_key_exists("login", $_REQUEST))
+{
+	$username = $_REQUEST["username"];
+	$password = $_REQUEST["password"];
+	
+	if (check_user_login($username, $password))
+	{
+//		echo "<h2>Joepie ingelogd!</h2>";
+		header("Location: index.php");
+	}
+	else
+	{
+		echo "<h3>Probeer het anders nog eens...</h3>";
+	}
+}
+
+print_login_form();
+?>
+</body>
+</html>

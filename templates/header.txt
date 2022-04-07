@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<title>Vuurwerkpaleis het zesde vingertje</title>
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+	<!-- @TODO: Meta: utf-8, auteur, etc. -->
+	<meta charset="utf-8" />	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+	<script src="js/add_basket.js"></script>
+<body>
+<?php
+session_start();
+if (!array_key_exists("user_id", $_SESSION)) {
+	header("Location: login.php");
+}
+?>
+	<div id="nav">
+		<h1>'t Zesde Vingertje</h1>
+		<h2>Welkom <?=$_SESSION["name"]?></h2>
+		<ul>
+			<li><a href="index.php">home</a></li>
+			<li><a href="products.php">producten</a></li>
+			<li><a href="contact.php">contact</a></li>
+			<li><a href="basket.php">winkelmandje</a></li>
+			<li><a href="logout.php">uitloggen</a></li> <!-- @TODO: grijs maken wanneer niet ingelogd... -->
+		</ul>
+	</div>
