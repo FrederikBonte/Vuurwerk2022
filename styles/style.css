@@ -27,7 +27,7 @@ div#nav ul li
 div.product:hover
 {
 	size: 120%;
-	background-color: #ddd;
+	background-color: #ccd;
 	box-shadow: 5px 5px 10px black;	
 	transform: scale(110%) rotate(-1deg);
 	transition: 0.5s;
