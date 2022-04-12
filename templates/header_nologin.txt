@@ -16,6 +16,7 @@ session_start();
 	<div id="nav">
 		<h1>'t Zesde Vingertje</h1>
 		<ul>
-			<li>login</li>
+			<li><a href="login.php">login</a></li>
+			<li><a href="register.php">registreren</a></li>
 		</ul>
 	</div>

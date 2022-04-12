@@ -22,7 +22,22 @@ div#nav ul li
 	padding-right: 25px;
 	margin: 5px;
 	background-color: lightgray;
+	transition: 0.5s;
 }
+
+div#nav ul li:hover
+{
+	background-color: #ccd;
+	box-shadow: 2px 2px 5px gray;
+	transition: 0.5s;
+}
+
+div#nav ul li a
+{
+	text-decoration: none;
+	font-weight: bold;
+}
+
 
 div.product:hover
 {

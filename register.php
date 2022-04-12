@@ -1,5 +1,5 @@
 <?php
-include "templates/header.txt";
+include "templates/header_nologin.txt";
 include "common/update_customer.php";
 
 if (array_key_exists("register", $_REQUEST))
