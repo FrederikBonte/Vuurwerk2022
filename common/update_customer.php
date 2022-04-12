@@ -1,6 +1,7 @@
 <?php
 require_once "debug.php";
 require_once "database.php";
+require_once "common/form_gen.php";
 
 function print_register_form()
 {
@@ -9,8 +10,10 @@ function print_register_form()
 	Naam : <input type="text" name="name" required /><br />	
 	Inlognaam : <input type="text" name="username" /><br />	
 	Wachtwoord : <input type="password" name="password" required /><br />	
-	<input type="submit" name="register" value="Registreren" />
-	<input type="reset" />
+<?php
+	print_button("submit", "register", "Registreren");
+	print_button("reset", null, "Reset");
+?>	
 </form>
 <?php	
 }
@@ -21,8 +24,10 @@ function print_login_form()
 <form method="POST">
 	Inlognaam : <input type="text" name="username" /><br />	
 	Wachtwoord : <input type="password" name="password" required /><br />	
-	<input type="submit" name="login" value="Inloggen" />
-	<input type="reset" />
+<?php
+	print_button("submit", "login", "Inloggen");
+	print_button("reset", null, "Reset");
+?>	
 </form>
 <?php	
 }

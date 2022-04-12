@@ -1,6 +1,7 @@
 <?php
 require_once "debug.php";
 require_once "database.php";
+require_once "form_gen.php";
 
 function print_add_article_form()
 {
@@ -9,8 +10,10 @@ function print_add_article_form()
 	Naam : <input type="text" name="name" placeholder="Naam van het vuurwerk" required /><br />	
 	Omschrijving : <input type="textarea" name="description" placeholder="Beschrijf het soort vuurwerk" required /><br />	
 	Prijs : <input type="number" name="price" placeholder="Prijs van het artikel" min="0.10" step="0.01" required /><br />	
-	<input type="submit" name="add_article" value="Toevoegen" />
-	<input type="reset" />
+<?php
+	print_button("submit", "add_article", "Toevoegen");
+	print_button("reset", null, "Reset");	
+?>
 </form>
 <?php
 }
@@ -25,8 +28,10 @@ function print_add_firework_form_tr()
 		<td><input type="textarea" name="description" placeholder="Beschrijf het soort vuurwerk" required /></td>
 		<td><input type="number" name="price" placeholder="Prijs van het artikel" min="0.10" step="0.01" required /></td>
 		<td>
-		<button type="submit" name="add_article"><span class="fa fa-plus"></span></button>
-		<button type="reset" ><span class="fa fa-undo"></span></button>
+<?php
+	print_button("submit", "add_article", "fa fa-plus");
+	print_button("reset", null, "fa fa-undo");	
+?>
 		</td>
 	</form>
 	</tr>
@@ -41,9 +46,11 @@ function print_change_article_form($record)
 	Naam : <input type="text" name="name" value="<?=$record['naam']?>" required /><br />	
 	Omschrijving : <input type="textarea" name="description" value="<?=$record['omschrijving']?>" /><br />	
 	Prijs : <input type="number" name="price" value="<?=$record['prijs']?>" min="0.10" step="0.01" required /><br />	
-	<input type="submit" name="add_article" value="Toevoegen" />
-	<input type="submit" name="cancel_article" value="Cancel" />
-	<input type="reset" />
+<?php
+	print_button("submit", "add_article", "Toevoegen");
+	print_button("submit", "cancel_article", "Annuleren");
+	print_button("reset", null, "Reset");	
+?>	
 </form>
 <?php	
 }
@@ -59,9 +66,11 @@ function print_change_firework_form_tr($record)
 		<td><input type="textarea" name="description" value="<?=$record['omschrijving']?>" /></td>
 		<td><input type="number" name="price" value="<?=$record['prijs']?>" min="0.10" step="0.01" required /></td>
 		<td>
-			<button type="submit" name="update_article"><span class="fa fa-pencil"></span></button>
-			<button type="reset" ><span class="fa fa-undo"></span></button>
-			<button type="submit" name="remove_article" ><span class="fa fa-trash"></span></button>
+<?php
+print_button("submit", "update_article", "fa fa-pencil");
+print_button("reset", null, "fa fa-undo");
+print_button("submit", "remove_article", "fa fa-trash");
+?>
 		</td>
 		</form>
 	</tr>
