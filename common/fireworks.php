@@ -1,5 +1,7 @@
 <?php
+require_once "debug.php";
 require_once "database.php";
+require_once "form_gen.php";
 //@TODO: Include and use the proper debug functions.
 
 function print_fireworks_table()
@@ -169,7 +171,7 @@ function print_edit_product_div($record)
 function print_product_div($record, $user_id)
 {
 ?>
-	<div class="product" onclick="on_add_basket(<?=$record["artikelnummer"]?>, <?=($user_id==null)?0:$user_id?>)">
+	<div class="product" onclick="on_add_basket(<?=$record["artikelnummer"]?>, 1)">
 		<h2><?=$record["naam"]?></h2>
 <?php
 	if ($record["plaatje"]!=null)
@@ -187,6 +189,7 @@ function print_product_div($record, $user_id)
 ?>		
 		<p><?=$record['omschrijving']?></p>
 		<span class="price"><?=$record["prijs"]?></span>
+
 	</div>
 <?php
 }

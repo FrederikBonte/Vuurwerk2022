@@ -1,6 +1,50 @@
 <?php
 require_once "debug.php";
 require_once "database.php";
+require_once "form_gen.php";
+
+function add_product_to_basket($product_id, $amount = 1)
+{
+	if (array_key_exists("basket", $_SESSION))
+	{
+		$basket = $_SESSION["basket"];
+	}
+	else
+	{
+		$basket = array();
+	}
+	$present = 0;
+	// Loop through all elements in the basket...
+	// & is required to be able to change on of the items.
+	foreach ($basket as $i=>&$item)
+	{
+		// Change the element using the $basket variable.
+		// For each provides a copy.
+		if ($item['id']==$product_id)
+		{
+			// Increase the amount...
+			$item['number'] += $amount; 
+			// Store the amount found so far.
+			$present = $item['number'];
+			if ($present<=0) 
+			{
+				unset($basket[$i]);
+			}
+			// Stop searching...
+			break;
+		}
+	}
+	// Stop referencing the array...
+	unset($item);
+	// When this product doesn't exist in the basket.
+	if ($present == 0 && $amount>0)
+	{
+		// Add one item of this product.
+		$basket[] = array('id'=>$product_id, 'number'=>$amount);
+	}
+	// Update the session variable.
+	$_SESSION["basket"] = $basket;
+}
 
 function print_basket()
 {
@@ -65,14 +109,13 @@ function print_edit_basket_product($record, $amount)
 	<div id="<?=$record['id']?>">
 		<h2><?=$record["naam"]?></h2>
 		<span class="price">Prijs: <?=$record['prijs']?></span><br />
-		<form>
-			<input type="hidden" name="product_id" value="<?=$record["artikelnummer"]?>" />
 		<span class="amount">
-			<button name="decrease" type="submit"><span class="fa fa-minus"></span></button>
-			<?=$amount?>
-			<button name="increase" type="submit"><span class="fa fa-plus"></span></button>
+<?php
+print_button("button", "decrease", "fa fa-minus", "on_add_basket(".$record["artikelnummer"].", -1)");
+echo "$amount\n";
+print_button("button", "increase", "fa fa-plus", "on_add_basket(".$record["artikelnummer"].", 1)");
+?>
 		</span>
-		</form>
 	</div>
 <?php
 }
