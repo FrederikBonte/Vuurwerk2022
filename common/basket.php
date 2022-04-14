@@ -50,9 +50,17 @@ function print_basket()
 {
 	if (array_key_exists("basket", $_SESSION))
 	{		
+		$content = false;
 		foreach ($_SESSION["basket"] as $product)
 		{
+			$content = true;
 			print_edit_basket($product['id'], $product['number']);
+		}
+		if ($content==false)
+		{
+?>
+	<h2>Basket is empty</h2>
+<?php
 		}
 	}
 	else
@@ -106,7 +114,7 @@ function print_edit_basket($product_id, $amount)
 function print_edit_basket_product($record, $amount)
 {
 ?>
-	<div id="<?=$record['id']?>">
+	<div id="<?=$record['artikelnummer']?>">
 		<h2><?=$record["naam"]?></h2>
 		<span class="price">Prijs: <?=$record['prijs']?></span><br />
 		<span class="amount">
