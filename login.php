@@ -1,6 +1,7 @@
 <?php
 include "templates/header_nologin.txt";
 include "common/update_customer.php";
+include "common/update_employee.php";
 
 if (array_key_exists("login", $_REQUEST))
 {
@@ -8,6 +9,11 @@ if (array_key_exists("login", $_REQUEST))
 	$password = $_REQUEST["password"];
 	
 	if (check_user_login($username, $password))
+	{
+//		echo "<h2>Joepie ingelogd!</h2>";
+		header("Location: index.php");
+	}
+	else if (check_employee_login($username, $password))
 	{
 //		echo "<h2>Joepie ingelogd!</h2>";
 		header("Location: index.php");
