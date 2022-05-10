@@ -81,7 +81,7 @@ function check_employee_login($number, $passwd)
 				// Recognise the user!
 				$_SESSION["name"] = $record["naam"];
 				$_SESSION["user_id"] = $record["id"];
-				$_SESSION["employee"] = $record["role"];
+				$_SESSION["employee"] = $record["rol"];
 				// Report that we found the user.
 				return true;
 			}

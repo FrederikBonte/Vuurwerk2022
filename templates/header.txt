@@ -12,13 +12,18 @@
 <body>
 <?php
 session_start();
+$role = "";
 if (!array_key_exists("user_id", $_SESSION)) {
 	header("Location: login.php");
+}
+else if (array_key_exists("employee", $_SESSION))
+{
+	$role = " (".$_SESSION["employee"].")";
 }
 ?>
 	<div id="nav">
 		<h1>'t Zesde Vingertje</h1>
-		<h2>Welkom <?=$_SESSION["name"]?></h2>
+		<h2>Welkom <?=$_SESSION["name"]?><?=$role?></h2>
 		<ul>
 			<li><a href="index.php">home</a></li>
 			<li><a href="products.php">producten</a></li>
