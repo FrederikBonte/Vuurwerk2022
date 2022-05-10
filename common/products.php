@@ -139,7 +139,7 @@ function print_edit_products()
 function print_edit_product_div($record)
 {
 ?>
-	<div class="product" onclick="on_add_basket(<?=$record["artikelnummer"]?>, <?=($user_id==null)?0:$user_id?>)>
+	<div class="product">
 		<h2><?=$record["naam"]?></h2>
 <?php
 	if ($record["plaatje"]!=null)
