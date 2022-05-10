@@ -1,8 +1,8 @@
 <?php
 include "templates/header.txt";
-require_once "common/debug.php";
-require_once "common/database.php";
-require_once "common/update_artikel.php";
+require_once "debug.php";
+require_once "database.php";
+require_once "update_article.php";
 
 function testDatabase()
 {
