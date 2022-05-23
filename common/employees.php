@@ -61,3 +61,114 @@ class Employees
 	
 	/// Update employee functions go here...
 }
+
+function print_edit_employees_table()
+{
+	// Let the database PDO be known...
+	global $database;
+	
+	$sql = "SELECT * FROM medewerker";
+	
+?>
+	<table>
+		<tr>
+			<th>Nummer</th>
+			<th>Naam</th>
+			<th>Rol</th>
+			<th>Wachtwoord</th>
+			<th>Acties</th>
+		</tr>
+<?php
+	
+	try {
+		// Execute the query...
+		$stmt = $database->query($sql);
+	
+		// Loop through all the records...
+		foreach ($stmt as $record)
+		{
+			// Print a form (tr) per record.
+			print_edit_employee_tr($record);
+		}
+	} 
+	catch (Exception $ex)
+	{
+		debug_error("Failed to read employees! Please inform the administrator.", $ex);
+	}
+
+	print_add_employee_tr();
+?>
+	</table>
+<?php
+}
+
+function print_edit_employee_tr($record)
+{
+?>
+		<tr><form method="POST">
+			<td>
+				<input type="hidden" name="id" value="<?=$record["id"]?>" /><?=$record["id"]?>
+			</td>
+			<td>
+				<input type="text" name="name" value="<?=$record["naam"]?>" required />
+			</td>
+			<td>
+<?php
+	print_select_role($record["rol"]);
+?>			
+			</td>
+			<td>
+				<input type="password" name="password" value="" />
+			</td>
+			<td>
+				<button type="submit" name="edit_employee"><span class="fa fa-save"></span></button>
+				<button type="submit" name="remove_employee"><span class="fa fa-trash"></span></button>
+			</td>
+		</form></tr>
+<?php
+}
+
+function print_add_employee_tr()
+{
+?>
+		<tr><form method="POST">
+			<td>Automatisch</td>
+			<td>
+				<input type="text" name="name" required />
+			</td>
+			<td>
+<?php
+	print_select_role();
+?>			
+			</td>
+			<td>
+				<input type="password" name="password" required/>
+			</td>
+			<td>
+				<button type="submit" name="add_employee"><span class="fa fa-plus"></span></button>
+			</td>
+		</form></tr>
+<?php
+}
+
+function print_select_role($selected_role = null)
+{
+	$s1 = "";
+	$s2 = "";
+	if ($selected_role=="medew")
+	{
+		$s2 = "selected";
+	}
+	else if ($selected_role=="admin")
+	{
+		$s1 = "selected";
+	}
+?>
+	<select name="role" required>
+		<option value="nobody" selected disabled>Kies een rol</option>
+		<option value="medew" <?=$s2?>>Medewerker</option>
+		<option value="admin" <?=$s1?>>Administrator</option>
+	</select>
+<?php
+}
+?>

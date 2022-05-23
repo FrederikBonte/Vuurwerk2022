@@ -96,3 +96,42 @@ div#basket div:hover img
 	transition: 1s;
 }
 
+/* SVG */
+rect {
+	fill: lightgray;
+}
+
+circle {
+	fill: white;
+}
+
+text {
+	fill: white;
+	font-weight: bolder;
+}
+
+rect.bar {
+	fill: #456;
+}
+
+rect.shadow {
+	fill: black;
+}
+
+table {
+	width: 900px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #89b;
+}
+
+table tr:nth-child(even) {
+	background-color: #9ad;
+}
+
+table tr:first-child {
+	font-size: 125%;
+	background-color: white;
+}
+

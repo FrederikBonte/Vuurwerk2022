@@ -19,18 +19,19 @@ function print_add_employee_form()
 
 // BELOW ARE THE ACTUAL DATABASE FUNCTIONS
 
-function register_employee($name, $passwd)
+function register_employee($name, $role, $passwd)
 {
 	// There exists a database connection.
 	global $database;
 	
 	// Design the SQL query...
 	// SALT is provided because otherwise the "field may not be null" check is triggered.
-	$sql = "INSERT INTO medewerker (naam, password, salt) VALUES (:field1, :field2, :field3, 1)";
+	$sql = "INSERT INTO medewerker (naam, rol, password, salt) VALUES (:field1, :field2, :field3, 1)";
 	
 	// Prepare the list of data that we need.
 	$data = [
 		"field1" => $name,
+		"field2" => $role,
 		"field3" => $passwd
 	];
 	
@@ -56,18 +57,122 @@ function register_employee($name, $passwd)
 	}
 }
 
+function update_employee($id, $name, $role)
+{
+	// There exists a database connection.
+	global $database;
+	
+	// Design the SQL query...
+	$sql = "UPDATE medewerker SET naam=:field1, rol=:field2 WHERE id=:field0";
+	
+	// Prepare the list of data that we need.
+	$data = [
+		"field1" => $name,
+		"field2" => $role,
+		"field0" => $id
+	];
+	
+	try 
+	{		
+		// Make the database process the query...
+		$stmt = $database->prepare($sql);
+		// Actually run the query using the prepared data.
+		if ($stmt->execute($data))
+		{
+			debug_log("The employee was updated in the database.");
+			return $database->lastInsertId();
+		}
+		else
+		{
+			debug_warning("The database refuses to add an employee.");
+			return -1;
+		}
+	}
+	catch (Exception $ex)
+	{
+		debug_error("Failed to add employee to the database.", $ex);
+	}
+}
+
+function remove_employee($id)
+{
+	// There exists a database connection.
+	global $database;
+	
+	// Design the SQL query...
+	$sql = "DELETE FROM medewerker WHERE id=:field0";
+	
+	// Prepare the list of data that we need.
+	$data = [
+		"field0" => $id
+	];
+	
+	try 
+	{		
+		// Make the database process the query...
+		$stmt = $database->prepare($sql);
+		// Actually run the query using the prepared data.
+		if ($stmt->execute($data))
+		{
+			debug_log("The employee was deleted from the database.");
+		}
+		else
+		{
+			debug_warning("The database refuses to delete an employee.");
+		}
+	}
+	catch (Exception $ex)
+	{
+		debug_error("Failed to remove an employee from the database.", $ex);
+	}
+}
+
+function update_employee_password($id, $password)
+{
+	// There exists a database connection.
+	global $database;
+	
+	// Design the SQL query...
+	$sql = "UPDATE medewerker SET password=:field1 WHERE id=:field0";
+	
+	// Prepare the list of data that we need.
+	$data = [
+		"field1" => $password,
+		"field0" => $id
+	];
+	
+	try 
+	{		
+		// Make the database process the query...
+		$stmt = $database->prepare($sql);
+		// Actually run the query using the prepared data.
+		if ($stmt->execute($data))
+		{
+			debug_log("The employees password was updated in the database.");
+		}
+		else
+		{
+			debug_warning("The database refuses to change the employees password.");
+		}
+	}
+	catch (Exception $ex)
+	{
+		debug_error("Failed to update employees password.", $ex);
+	}
+}
+
 function check_employee_login($number, $passwd)
 {
 	// There is a database.
 	global $database;
 	
-	$sql = "SELECT * FROM medewerker WHERE id = :field1 AND MD5(CONCAT(:field2, salt)) = password;";
+	$sql = "SELECT * FROM medewerker WHERE id = :field1 AND MD5(CONCAT(:field2, salt)) = password";
 	debug_log($sql);
 	
 	// Prepare the list of data that we need.
 	$data = [
 		"field1" => $number,
-		"field2" => $passwd
+		"field2" => utf8_encode($passwd)
 	];	
 	
 	try

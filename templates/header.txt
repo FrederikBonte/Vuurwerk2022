@@ -9,11 +9,14 @@
 	<!-- Add icon library -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
 	<script src="js/add_basket.js"></script>
+</head>
 <body>
 <?php
 session_start();
+//var_dump($_SESSION);
 $role = "";
 if (!array_key_exists("user_id", $_SESSION)) {
+
 	header("Location: login.php");
 }
 else if (array_key_exists("employee", $_SESSION))
@@ -29,6 +32,13 @@ else if (array_key_exists("employee", $_SESSION))
 			<li><a href="products.php">producten</a></li>
 			<li><a href="contact.php">contact</a></li>
 			<li><a href="basket.php">winkelmandje</a></li>
+<?php
+if ($_SESSION["employee"]=="admin") {
+?>
+			<li><a href="employees.php">medewerkers</a></li>
+<?php
+}	
+?>
 			<li><a href="logout.php">uitloggen</a></li> <!-- @TODO: grijs maken wanneer niet ingelogd... -->
 		</ul>
 	</div>

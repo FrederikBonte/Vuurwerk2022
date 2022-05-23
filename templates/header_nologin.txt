@@ -9,10 +9,8 @@
 	<!-- Add icon library -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></head>
 	<script src="js/add_basket.js"></script>
+</head>
 <body>
-<?php
-session_start();
-?>
 	<div id="nav">
 		<h1>'t Zesde Vingertje</h1>
 		<ul>
